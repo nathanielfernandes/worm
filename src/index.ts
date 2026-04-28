@@ -1,4 +1,5 @@
 import { Elysia, t } from "elysia";
+import { cors } from "@elysia/cors";
 import {
   getCachedSearch,
   setCachedSearch,
@@ -101,6 +102,11 @@ async function books(id: string) {
 }
 
 const app = new Elysia()
+  .use(
+    cors({
+      origin: "*",
+    }),
+  )
   .get(
     "/search",
     async ({ query, set }) => {
