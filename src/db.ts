@@ -2,9 +2,10 @@ import { Database } from "bun:sqlite";
 import { mkdirSync } from "fs";
 import type { BookMetadata, SearchResponse } from "./types";
 
-mkdirSync("data", { recursive: true });
+const DATA_DIR = process.env.DATA_DIR || "data";
+mkdirSync(DATA_DIR, { recursive: true });
 
-const db = new Database("data/worm.db", { create: true });
+const db = new Database(`${DATA_DIR}/worm.db`, { create: true });
 db.exec("PRAGMA journal_mode=WAL;");
 
 db.exec(`

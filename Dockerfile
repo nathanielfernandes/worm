@@ -9,7 +9,7 @@ WORKDIR /app
 COPY --from=build /app/node_modules node_modules
 COPY --from=build /app/src src
 COPY --from=build /app/package.json .
-RUN mkdir -p /data
-
+ENV DATA_DIR=/data
+VOLUME /data
 EXPOSE 3000
 CMD ["bun", "run", "src/index.ts"]
