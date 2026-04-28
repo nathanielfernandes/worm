@@ -9,6 +9,7 @@ WORKDIR /app
 COPY --from=build /app/node_modules node_modules
 COPY --from=build /app/src src
 COPY --from=build /app/package.json .
-VOLUME /app/data
+RUN mkdir -p /data
+
 EXPOSE 3000
 CMD ["bun", "run", "src/index.ts"]
